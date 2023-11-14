@@ -1,0 +1,102 @@
+{
+  "info": {
+    "version": "1.0",
+    "title": "BookGptsApiWeb"
+  },
+  "host": "localhost:4000",
+  "definitions": {
+    "Note": {
+      "description": "A note in the application",
+      "example": {
+        "notes": [
+          "option1",
+          "option2"
+        ],
+        "quote": "some quote"
+      },
+      "properties": {
+        "notes": {
+          "description": "Notes associated with the quote",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "quote": {
+          "description": "Quote of the note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "quote"
+      ],
+      "title": "Note",
+      "type": "object"
+    }
+  },
+  "paths": {
+    "/api/notes": {
+      "post": {
+        "description": "Create a new note",
+        "operationId": "BookGptsApiWeb.NoteController.create",
+        "parameters": [
+          {
+            "description": "Note to be created",
+            "in": "body",
+            "name": "note",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Note"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Note created",
+            "schema": {
+              "$ref": "#/definitions/Note"
+            }
+          },
+          "422": {
+            "description": "Invalid data"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Note"
+        ]
+      }
+    },
+    "/api/notes/{quote}": {
+      "get": {
+        "description": "Get a note by quote",
+        "operationId": "BookGptsApiWeb.NoteController.show_by_quote",
+        "parameters": [
+          {
+            "description": "Quote of the note",
+            "in": "path",
+            "name": "quote",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note found",
+            "schema": {
+              "$ref": "#/definitions/Note"
+            }
+          },
+          "404": {
+            "description": "Note not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Note"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}

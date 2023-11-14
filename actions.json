@@ -1,0 +1,112 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "version": "1.0",
+        "title": "BookGptsApiWeb"
+    },
+    "servers": [
+        {
+            "url": "https://notes-from-underground-tutor.fly.dev/"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Note": {
+                "description": "A note in the application",
+                "example": {
+                    "notes": [
+                        "note1",
+                        "note2"
+                    ],
+                    "quote": "some quote"
+                },
+                "properties": {
+                    "notes": {
+                        "description": "Notes associated with the quote",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "quote": {
+                        "description": "Quote of the note",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "quote"
+                ],
+                "title": "Note",
+                "type": "object"
+            }
+        }
+    },
+    "paths": {
+        "/api/notes/{quote}": {
+            "get": {
+                "description": "Notes related to the quote provided",
+                "operationId": "show_by_quote",
+                "parameters": [
+                    {
+                        "description": "Quote",
+                        "in": "path",
+                        "name": "quote",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-example": "It was the blurst of times"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note found",
+                        "schema": {
+                            "$ref": "#/components/schemas/Note"
+                        }
+                    },
+                    "404": {
+                        "description": "Note not found"
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Note"
+                ]
+            }
+        },
+        "/api/notes": {
+            "post": {
+                "description": "Create a new note",
+                "operationId": "create_note",
+                "parameters": [
+                    {
+                        "description": "Note to be created",
+                        "in": "body",
+                        "name": "note",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Note"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Note created",
+                        "schema": {
+                            "$ref": "#/components/schemas/Note"
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Note"
+                ]
+            }
+        }
+    },
+    "swagger": "2.0"
+}

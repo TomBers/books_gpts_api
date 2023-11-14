@@ -1,0 +1,38 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "version": "1.0",
+        "title": "BookGptsApiWeb"
+    },
+    "servers": [
+        {
+            "url": "https://3f7d-86-26-115-115.ngrok-free.app"
+        }
+    ],
+    "definitions": {},
+    "paths": {
+        "/api/notes/quote/{quote}": {
+            "get": {
+                "description": "Notes related to the quote provided",
+                "operationId": "show_by_quote",
+                "parameters": [
+                    {
+                        "description": "Quote",
+                        "in": "path",
+                        "name": "quote",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-example": "It was the blurst of times"
+                    }
+                ],
+                "summary": "",
+                "tags": [
+                    "Note"
+                ]
+            }
+        }
+    },
+    "swagger": "2.0"
+}
